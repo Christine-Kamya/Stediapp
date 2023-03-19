@@ -72,9 +72,9 @@ const ProfileStackScreen = (props) =>{
         headerTintColor:'white'}}>
 
         <Stack.Screen name="Profile" 
-        //component={Profile}
-        children={()=><Profile setLoggedInState={props.setLoggedInState}/>}
-         options={{
+        // component={Profile} 
+        children={() => <Profile setLoggedInState={props.setLoggedInState}/>}
+        options={{
              headerTitleAlign: "center",
              headerTitleStyle:{
                fontWeight:'bold', 
@@ -175,7 +175,7 @@ export default function Navigation (props) {
                   }}
             />
             <Tab.Screen name="TabProfile" 
-            //component={ProfileStackScreen}
+            // component={ProfileStackScreen}
             children={()=><ProfileStackScreen setLoggedInState={props.setLoggedInState}/>}
             options={{
                 // tabBarColor:'pink',
