@@ -12,7 +12,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import { FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { Ionicons} from 'react-native-vector-icons';
-// import { Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 // import { IconButton } from 'react-native-paper';
 
 
@@ -32,6 +32,20 @@ export default function Counter(props) {
   };
   getUserName();
 },[]);
+
+const shareToSpotter = async () => {
+  const userToken = await AsyncStorage.getItem('sessionToken');
+  const shareOptions = {
+    // Find out haw to use the getUserName function to make this modular.
+    message: ("https://dev.stedi.me/timer.html#" + userToken),
+  };
+  try {
+    const shareResponse = await Share.share(shareOptions);
+    console.log(shareResponse);
+  } catch (error) {
+    console.log("Error", error);
+  }
+};
 
  useEffect(()=>{
   if (currentScreen == 'counter'){
@@ -327,7 +341,9 @@ elevation: 4}}>
     >
       <Text>{subscription ? 'Stop' : 'GO'}</Text>
      </TouchableOpacity>
-
+  <TouchableOpacity onPress={shareToSpotter} style = {styles.sbutton}>
+    <Text>Share to Spotter</Text>
+    </TouchableOpacity>
      </CardContent>
      <ProgressBar progress={(stepCount * 0.50/30) + (completionCount * 0.50)} width={300} height={25} color={'#A0CE4E'} style={styles.bar}/>
 </Card>
@@ -433,7 +449,7 @@ const styles = StyleSheet.create({
 
   button: {
     marginTop: 15,
-    marginBottom: 20,
+    marginBottom: 10,
     width: 170,
     height: 38,
     justifyContent: 'center',
@@ -443,6 +459,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#A0CE4E',
     marginLeft:50
   },
+
+  sbutton: {
+    marginTop: 0,
+    marginBottom: 20,
+    width: 170,
+    height: 38,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    borderRadius: 100,
+    backgroundColor: '#A0CE4E',
+    marginLeft:50
+  },
+
   text:{
 textAlign: 'center',
 marginBottom: 2

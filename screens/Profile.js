@@ -33,7 +33,7 @@ const Profile = (props) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [cameraReady, setCameraReady] = useState(false);
   const cameraRef = useRef(null);
-
+``
   useEffect(() => {
     const getUserInfo = async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
@@ -51,7 +51,7 @@ const Profile = (props) => {
 
   const myCustomerShare = async () => {
     const shareOptions = {
-      message: "This is a test",
+      message: "https://stedibalance.com",
     };
     try {
       const shareResponse = await Share.share(shareOptions);
